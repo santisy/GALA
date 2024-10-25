@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="BRIGHT: Bi-level Feature Representation of Image Collections using Groups of Hash Tables">
+  <meta name="keywords" content="Representation Learning, Generative Models">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BRIGHT: Bi-level Feature Representation of Image Collections using Groups of Hash Tables</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!--
+  <link rel="icon" href="./static/images/favicon.svg">
+  -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!--
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+-->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">BRIGHT: Bi-level Feature Representation of Image Collections using Groups of Hash Tables</h1>
+            <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://santisy.github.io/">Dingdong Yang</a><sup>1</sup>,</span>
+              <a href="https://actasidiot.github.io/">Yizhi Wang</a><sup>1</sup>,</span>
+              <a href="https://www.sfu.ca/~amahdavi/">Ali Mahdavi-Amiri</a><sup>1</sup>,</span>
+              <a href="https://www.cs.sfu.ca/~haoz/">Hao Zhang</a><sup>1</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Simon Fraser University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2305.18601.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2305.18601"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=0TfpVaniAp0"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/bright-project01/bright_code_release"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="static/images/concept_of_our_method.png"
+           alt="concept of our method"
+      >
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Bright</span> projects images into <b>key codes</b>  and then
+        uses the key codes to retrieve features from <b>hash tables</b>, instead of directly encoding images into features.</h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <img src="static/images/ffhq_web_show_01.png">
+        </div>
+        <div class="item item-chair-tp">
+          <img src="static/images/ffhq_web_show_02.png">
+        </div>
+        <div class="item item-shiba">
+          <img src="static/images/ffhq_web_show_03.png">
+        </div>
+        <div class="item item-fullbody">
+          <img src="static/images/church_web_show_01.png">
+        </div>
+        <div class="item item-blueshirt">
+          <img src="static/images/church_web_show_02.png">
+        </div>
+        <div class="item item-mask">
+          <img src="static/images/church_web_show_03.png">
+        </div>
+      </div>
+    </div>
+      <h2 class="subtitle has-text-centered">
+        <u>Uncurated</u> generated results from the diffusion model trained on our <b>key codes</b>.
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          We present BRIGHT, a <em>bi-level</em> feature representation for an image <em>collection</em>,
+consisting of a per-image latent space on top of a multi-scale feature grid space.
+Our representation is learned by an autoencoder to encode images into continuous
+key codes, which are used to retrieve features from groups of multi-resolution hash
+tables. Our key codes and hash tables are trained together continuously with well-
+defined gradient flows, leading to high usage of the hash table entries and improved
+generative modeling compared to discrete Vector Quantization (VQ). Differently
+from existing continuous representations such as KL-regularized latent codes, our
+key codes are strictly bounded in scale and variance. Overall, feature encoding
+by BRIGHT is compact, efficient to train, and enables generative modeling over
+the image codes using state-of-the-art generators such as latent diffusion models
+(LDMs). Experimental results show that our method achieves comparable recon-
+struction results to VQ methods while having a smaller and more efficient decoder
+network. By applying LDM over our key code space, we achieve state-of-the-art
+performance on image synthesis on the LSUN-Church and human-face datasets.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/0TfpVaniAp0?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-3">Pipeline </h2>
+          <p>
+            Overall pipeline of our method in three parts: Encoding, Hash Retrieval and Decoding.
+          </p>
+          <img src="static/images/pipeline.png">
+        </div>
+      </div>
+
+      <!--
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-3">Visual Effects</h2>
+          <p>
+            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
+            would be impossible without nerfies since it would require going through a wall.
+          </p>
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/dollyzoom-stacked.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="column">
+        <h2 class="title is-3">Matting</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/matting.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+      -->
+    </div>
+    <!--/ Matting. -->
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Results</h2>
+
+        <!-- Interpolating. -->
+        <h3 class="title is-4">Reconstruction</h3>
+        <div class="content has-text-justified">
+          <p>
+            Our largest model (code size 16 × 16 × 16) has only 10M
+more parameters (≈ 24% increase) than those of the corresponding VQGAN and RQ-VAE models.
+However, our model outperforms VQGAN and RQ-VAE across all metrics, showing <b>55% and 41%
+improvements</b> in LPIPS, respectively. In terms of computational costs, our method requires <b>≈ 50%
+fewer GFlops </b>due to its smaller decoder and the efficiency gained from utilizing the hash tables.
+          </p>
+        </div>
+
+        <div class="column">
+          <div class="content">
+            <img src="static/images/recon_results.png">
+            <p align="center">
+              Reconstruction metrics on the validation splits of FFHQ and LSUN-Church dataset.
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <img src="static/images/size_of_models.png">
+            <p align="center">
+              Trainable parameters and computational load of decoders.
+              An <sup>*</sup> indicates total number of parameters in hash tables and
+              <sup>&Dagger;</sup> refers to total computational cost of decoding <em>and</em>
+              feature retrieval from hash tables.
+            </p>
+          </div>
+        </div>
+        <br/>
+        <!--/ Interpolating. -->
+
+        <!-- Re-rendering. -->
+        <h3 class="title is-4">Generation</h3>
+        <div class="content has-text-justified">
+          <p>
+            The <b>precision </b>of our
+generated images is significantly higher than others, indicating a substantial reduction of low-quality
+samples in our results, while our recall is almost the same as StyleGAN2. Our method also gets competitive results on
+FID, CLIP-FID and Inception Scores.
+          </p>
+        </div>
+        <div class="column">
+          <div class="content">
+            <img src="static/images/ffhq_gen_quant_results.png" class="center_table">
+            <p align="center">
+              Quantitative results of generation on FFHQ dataset. <sup>*</sup> denotes the results calculated 
+              on publicly released checkpoint by LDM author on Github.
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <img src="static/images/church_gen_quant_results.png" class="center_table">
+            <p align="center">
+              Quantitative results of generation on LSUN-Church dataset.
+            </p>
+          </div>
+        </div>
+        <!--/ Re-rendering. -->
+
+        <!-- Nearest Neighbour -->
+        <h3 class="title is-4">Nearest Neighbour</h3>
+        <div class="content has-text-justified">
+          <p>
+            Although our method has much higher precision scores than previous methods, we show the nearest neighbour
+            search by LPIPS to demonstrate that our generated samples are unique and <b>not</b> mere retrievals from the training dataset.
+            In the following images, the <b>leftmost</b> images in each row are generated images from our method and the rest images in each row
+            are the nearest neighbour search results.
+          </p>
+        </div>
+        <div class="column">
+          <div class="content_hscroll">
+            <img src="static/images/ffhq_nearest_sup_show.png">
+          </div>
+        </div>
+        <div class="column">
+          <div class="content_hscroll">
+            <img src="static/images/lsun_nearest_sup_show.png">
+          </div>
+        </div>
+        <!--/ Re-rendering. -->
+
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{yang2023bright,
+      title={BRIGHT: Bi-level Feature Representation of Image Collections using Groups of Hash Tables}, 
+      author={Dingdong Yang and Yizhi Wang and Ali Mahdavi-Amiri and Hao Zhang},
+      year={2023},
+      eprint={2305.18601},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
