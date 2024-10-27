@@ -6,9 +6,10 @@
         content="BRIGHT: Bi-level Feature Representation of Image Collections using Groups of Hash Tables">
   <meta name="keywords" content="Representation Learning, Generative Models">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BRIGHT: Bi-level Feature Representation of Image Collections using Groups of Hash Tables</title>
+  <title>GALA</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -44,81 +45,31 @@
 </head>
 <body>
 
-<!--
-
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
--->
-
-
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">BRIGHT: Bi-level Feature Representation of Image Collections using Groups of Hash Tables</h1>
+          <h1 class="title is-1 publication-title">GALA: Geometry-Aware Local Adaptive Grids for Detailed 3D Generation</h1>
             <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://santisy.github.io/">Dingdong Yang</a><sup>1</sup>,</span>
               <a href="https://actasidiot.github.io/">Yizhi Wang</a><sup>1</sup>,</span>
+              <a href="https://prs.igp.ethz.ch/group/people/person-detail.schindler.html">Konrad Schindler</a><sup>2</sup>,</span>
               <a href="https://www.sfu.ca/~amahdavi/">Ali Mahdavi-Amiri</a><sup>1</sup>,</span>
               <a href="https://www.cs.sfu.ca/~haoz/">Hao Zhang</a><sup>1</sup></span>
           </div>
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Simon Fraser University</span>
+            <span class="author-block"><sup>2</sup>ETH Zurich</span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2305.18601.pdf"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2305.18601"
+                <a href="https://arxiv.org/pdf/2410.10037"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -126,18 +77,9 @@
                   <span>arXiv</span>
                 </a>
               </span>
-              <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=0TfpVaniAp0"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span>
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/bright-project01/bright_code_release"
+                <a href="https://github.com/santisy/project_sv"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -158,43 +100,18 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src="static/images/concept_of_our_method.png"
+      <img src="static/images/top_teaser_cropped.png"
            alt="concept of our method"
       >
       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Bright</span> projects images into <b>key codes</b>  and then
-        uses the key codes to retrieve features from <b>hash tables</b>, instead of directly encoding images into features.</h2>
+        Given a watertight mesh (a), our representation, <span class="dnerf">GALA</span>, 
+        for geometry-aware local adaptive grids, distributes a set of root node voxels (<b><span style="color: rgb(235, 94, 51);">coral</span></b>) 
+        to cover the mesh surfaces. An octree subdivision is applied to each root, 
+        with a subset shown in (c). In each non-empty octree leaf node (<b><span style="color: rgb(50, 235, 128);">green</span></b>), 
+        a local grid (<b><span style="color: rgb(255, 0, 0);">red dots</span></b>) is oriented and anisotropically scaled to adapt to and tightly 
+        bound the local surface geometries. Only <b>277K parameters</b> with <b>8-bit</b> quantization 
+        yields an accurate representation (e).
     </div>
-  </div>
-</section>
-
-
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <img src="static/images/ffhq_web_show_01.png">
-        </div>
-        <div class="item item-chair-tp">
-          <img src="static/images/ffhq_web_show_02.png">
-        </div>
-        <div class="item item-shiba">
-          <img src="static/images/ffhq_web_show_03.png">
-        </div>
-        <div class="item item-fullbody">
-          <img src="static/images/church_web_show_01.png">
-        </div>
-        <div class="item item-blueshirt">
-          <img src="static/images/church_web_show_02.png">
-        </div>
-        <div class="item item-mask">
-          <img src="static/images/church_web_show_03.png">
-        </div>
-      </div>
-    </div>
-      <h2 class="subtitle has-text-centered">
-        <u>Uncurated</u> generated results from the diffusion model trained on our <b>key codes</b>.
   </div>
 </section>
 
@@ -206,38 +123,99 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
-          We present BRIGHT, a <em>bi-level</em> feature representation for an image <em>collection</em>,
-consisting of a per-image latent space on top of a multi-scale feature grid space.
-Our representation is learned by an autoencoder to encode images into continuous
-key codes, which are used to retrieve features from groups of multi-resolution hash
-tables. Our key codes and hash tables are trained together continuously with well-
-defined gradient flows, leading to high usage of the hash table entries and improved
-generative modeling compared to discrete Vector Quantization (VQ). Differently
-from existing continuous representations such as KL-regularized latent codes, our
-key codes are strictly bounded in scale and variance. Overall, feature encoding
-by BRIGHT is compact, efficient to train, and enables generative modeling over
-the image codes using state-of-the-art generators such as latent diffusion models
-(LDMs). Experimental results show that our method achieves comparable recon-
-struction results to VQ methods while having a smaller and more efficient decoder
-network. By applying LDM over our key code space, we achieve state-of-the-art
-performance on image synthesis on the LSUN-Church and human-face datasets.
+          We propose GALA, a novel representation of 3D shapes that (i) excels at capturing
+          and reproducing complex geometry and surface details, (ii) is computationally
+          efficient, and (iii) lends itself to 3D generative modelling with modern, diffusion-
+          based schemes. The key idea of GALA is to exploit both the global sparsity of
+          surfaces within a 3D volume and their local surface properties. <strong>Sparsity</strong> is promoted
+          by covering only the 3D object boundaries, not empty space, with an ensemble of
+          tree root voxels. Each voxel contains an octree to further limit storage and compute
+          to regions that contain surfaces. <strong>Adaptivity</strong> is achieved by fitting one local and
+          geometry-aware coordinate frame in each non-empty leaf node. Adjusting the
+          orientation of the local grid, as well as the anisotropic scales of its axes, to the local
+          surface shape greatly increases the amount of detail that can be stored in a given
+          amount of memory, which in turn allows for quantization without loss of quality.
+          With our optimized C++/CUDA implementation, GALA can be fitted to an object
+          in less than <strong>10 seconds</strong>. Moreover, the representation can efficiently be flattened
+          and manipulated with transformer networks. We provide a cascaded generation
+          pipeline capable of generating 3D shapes with great geometric detail.
           </p>
         </div>
       </div>
     </div>
     <!--/ Abstract. -->
 
-    <!-- Paper video. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/0TfpVaniAp0?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="model-container">
+          <model-viewer src="https://storage.googleapis.com/project-gala-3ds/out_0353_0.glb" alt="Model 3"
+            camera-controls
+            auto-rotate
+            background-color="#ffffff"
+            exposure="0.4"
+            shadow-intensity="1">
+          </model-viewer>
+          <div class="model-title">Model 3</div>
+        </div>
+        <div class="model-container">
+          <model-viewer src="https://storage.googleapis.com/project-gala-3ds/out_0353_0.glb" alt="Model 3"
+            camera-controls
+            auto-rotate
+            background-color="#ffffff"
+            exposure="0.4"
+            shadow-intensity="1">
+          </model-viewer>
+          <div class="model-title">Model 3</div>
+        </div>
+        <div class="model-container">
+          <model-viewer src="https://storage.googleapis.com/project-gala-3ds/out_0353_0.glb" alt="Model 3"
+            camera-controls
+            auto-rotate
+            background-color="#ffffff"
+            exposure="0.4"
+            shadow-intensity="1">
+          </model-viewer>
+          <div class="model-title">Model 3</div>
+        </div>
+        <div class="model-container">
+          <model-viewer src="https://storage.googleapis.com/project-gala-3ds/out_0353_0.glb" alt="Model 3"
+            camera-controls
+            auto-rotate
+            background-color="#ffffff"
+            exposure="0.4"
+            shadow-intensity="1">
+          </model-viewer>
+          <div class="model-title">Model 3</div>
+        </div>
+        <div class="model-container">
+          <model-viewer src="https://storage.googleapis.com/project-gala-3ds/out_0353_0.glb" alt="Model 3"
+            camera-controls
+            auto-rotate
+            background-color="#ffffff"
+            exposure="0.4"
+            shadow-intensity="1">
+          </model-viewer>
+          <div class="model-title">Model 3</div>
+        </div>
+        <div class="model-container">
+          <model-viewer src="https://storage.googleapis.com/project-gala-3ds/out_0353_0.glb" alt="Model 3"
+            camera-controls
+            auto-rotate
+            background-color="#ffffff"
+            exposure="0.4"
+            shadow-intensity="1">
+          </model-viewer>
+          <div class="model-title">Model 3</div>
         </div>
       </div>
     </div>
-    <!--/ Paper video. -->
+      <h2 class="subtitle has-text-centered">
+        Gallery of examples of detailed 3D generation results.
   </div>
 </section>
 

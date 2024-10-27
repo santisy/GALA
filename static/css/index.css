@@ -112,6 +112,8 @@ body {
 
 .results-carousel {
   overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .results-carousel .item {
@@ -166,4 +168,54 @@ body {
   width: auto;
   height: 400px;
   overflow-y: scroll;
+}
+
+.hero-body img {
+  margin-bottom: 20px; /* Adds space below the image */
+}
+
+.hero-body {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.model-container {
+  width: 48%;
+  margin: 1%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+model-viewer {
+  width: 100%;
+  height: 400px;
+  background-color: #e0e0e0;
+}
+
+
+.model-title {
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  background-color: #fafafa;
+  border-top: 1px solid #ccc;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .model-container {
+    width: 98%;
+    margin: 1% auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .model-container {
+    width: 98%;
+    margin: 1% auto;
+  }
 }
