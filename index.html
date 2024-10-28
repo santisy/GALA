@@ -9,6 +9,8 @@
   <title>GALA</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
@@ -664,7 +666,7 @@
         </div>
     </div>
       <h2 class="subtitle has-text-centered">
-        Gallery of examples of <i><b>detailed</b></i> and <i><b>diversified</b></i> 3D generation results.
+        Gallery of examples of <i><b>detailed</b></i> and <i><b>diverse</b></i> 3D generation results.
   </div>
 </section>
 
@@ -692,14 +694,99 @@
               representation precision (in Chamfer Distance) vs. number of parameter.
               From this plot, we can also have a very intuitive conclusion that GALA not only 
               represents geometry accurately but also with one of the <b>fewest parameter count</b>. 
-              Here, the &dagger; means the <b>non</b>-quantized version of GALA.
+              Here, the &dagger; means the <b>non</b>-quantized version of GALA. Quantized version of 
+              GALA in default yields in only <b>~0.28MB</b> per object GALA storage.
             </p>
           </div>
         </div>
     </div>
 
     <!-- Animation. -->
+    <div class="column is-centered">
+        <div class="content">
+          <h2 class="title is-3">Efficient Implementation of GALA Fitting (~10 seconds)</h2>
+        </div>
+        <div class="wrap-container">
+          <img src="./static/images/Chair_histograms_new.gif" class="animated-gif" id="gif01">
+          <img src="./static/images/Airplane_histograms_new.gif" class="animated-gif" id="gif02">
+        </div>
+        <div class="text-content">
+          <!-- Your text content goes here -->
+          <p>
+            We measure the time of our pure C++/CUDA implementation of GALA fitting process on 250 ShapeNet Airplane (<b>Left</b>), 
+            and ShapeNet Chair (<b>Right</b>) objects. Under the configuration of 6 virtualized logical cores (hyper-thread) of AMD EPYC 7413 
+            @2.65GHz and 1 Nvidia A100, meansurements yielded in <span style="color: rgb(93, 150, 192);"><b>2.56</b> &plusmn; 1.30s</span>, 
+            <span style="color: rgb(244, 93, 100);"><b>5.60</b> &plusmn; 1.86s</span> of airplane and 
+            <span style="color: rgb(93, 150, 192);"><b>3.17</b> &plusmn; 1.66s</span>, 
+            <span style="color: rgb(244, 93, 100);"><b>5.79</b> &plusmn; 1.67s</span> of chair. For a record, 
+            the fitting time of GALA measured on a low-end Desktop (Nvidia RTX 3060 and Intel i9-12900K) is 
+            about 3 seconds for extraction and 27 seconds for refinement. Moreover, peak GPU memory usage 
+            is <b>less than 800MB</b>.
+          </p>
+        </div>
+    </div>
 
+    <div class="column is-centered">
+        <div class="content">
+          <h2 class="title is-3">Cascaded Generation of GALA</h2>
+        </div>
+        <div class="text-content">
+          <!-- Your text content goes here -->
+          <p>
+            Based on our <b><i>Octree Forests</i></b> setting of GALA, we are able to 
+            naturally construct the generation process in a cascaded fashion. As shown below: 
+            (1) <b>Root Voxel Diffusion</b> of vector set \( X_o = \{\mathbf{x_o}\in\mathbb{R}^4|(\mathbf{p}, s)\} \); 
+            (2) <b>Grid Config Diffusion</b> of vector set \( X_{\bar{V}} = \{\mathbf{x}_{\bar{V}}\in\mathbb{R}^10|(\mathbf{p}_g, \mathbf{q}, \mathbf{s}_g)\} \);
+            (3) and <b>Grid Value Regression</b> \( X_V = \{ \mathbf{x}_V \in \mathbb{R}^{m^3} \} \). For more on the symbols used here,  
+            please refer to Figure. 3 of the <a href="https://arxiv.org/pdf/2410.10037">paper</a>. Qualitative comparisons with other 
+            baselines are also shown below.
+          </p>
+        </div>
+        <div class="content">
+          <img src="static/images/abstract_gen_pipeline_cropped.png" id="abstract-gen">
+          <img src="static/images/generation_compare_cropped.png" id="abstract-gen">
+          <img src="static/images/other_generation_compare_cropped.png" id="abstract-gen">
+        </div>
+    </div>
+
+    <div class="column is-centered">
+        <div class="content">
+          <h2 class="title is-3">Application: Autocompletion</h2>
+        </div>
+        <div class="content">
+          <img src="static/images/autocomplete_show_cropped.png" id="abstract-gen">
+        </div>
+        <div class="text-content">
+          <!-- Your text content goes here -->
+          <p>
+            As shown above, given coarse and partial inputs (the root voxels in 
+            <span style="color: rgb(235, 94, 51);">orange</span>), we firstly autocomplete 
+            the rest root voxles (<span style="color: rgb(52, 147, 235);">blue</span>) and then
+            generate the geometries. This coarse-to-fine generation pipeline has the potential of openning up 
+            a possible way of interactive 3D creation in the future.
+          </p>
+        </div>
+    </div>
+
+    <div class="column is-centered">
+        <div class="content">
+          <h2 class="title is-3">Texturing The Generated Mesh</h2>
+        </div>
+        <div class="content">
+          <img src="static/images/texturing_more_cropped.png" id="abstract-gen">
+        </div>
+        <div class="text-content">
+          <!-- Your text content goes here -->
+          <p>
+            First carving the mesh and then adding textures is a standard work-
+            flow in 3D asset creation within the industry, which allows flexibility
+            of creating various textures while reusing the fine meshes already
+            crafted. Many deep learning works follow this strategy. 
+            Here we use <a href="https://sairajk.github.io/easi-tex/">Easi-Tex</a> 
+            to texture the generated meshes guided by reference images.
+          </p>
+        </div>
+    </div>
 
   </div>
 </section>
@@ -751,6 +838,36 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Wait for the DOM to fully load
+  document.addEventListener("DOMContentLoaded", function() {
+      // Select all GIFs with the class 'animated-gif'
+      var gifs = document.querySelectorAll('.animated-gif');
+
+      // Create an Intersection Observer instance
+      var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                  // Restart the GIF by resetting its src attribute
+                  var gif = entry.target;
+                  var currentSrc = gif.src;
+                  gif.src = '';          // Clear the src to reset the GIF
+                  gif.src = currentSrc;  // Reassign the original src
+              }
+          });
+      }, {
+          root: null,       // Use the viewport as the container
+          rootMargin: '0px',
+          threshold: 0      // Trigger when any part of the GIF is visible
+      });
+
+      // Observe each GIF element
+      gifs.forEach(function(gif) {
+          observer.observe(gif);
+      });
+  });
+</script>
 
 </body>
 </html>

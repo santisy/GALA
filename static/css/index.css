@@ -231,6 +231,13 @@ model-viewer {
   margin-right: 20px; /* Space between image and text */
 }
 
+.animated-gif{
+  width: 25%;            /* Adjust width as needed */
+  margin: 0 2.5%;        /* Adjust margins to center and space images */
+  box-sizing: border-box; /* Include padding and border in the element's total width */
+  flex: 1;
+}
+
 .text-content {
   flex: 1; /* Fills the remaining space */
 }
@@ -253,4 +260,8 @@ model-viewer {
 
 .wrap-container img#repre_2D{
   width: 200% 
+}
+
+.content img#abstract-gen{
+  margin-top: 20px;
 }
