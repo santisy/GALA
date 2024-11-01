@@ -720,20 +720,22 @@
           <img src="./static/images/Chair_histograms_new.gif" class="animated-gif" id="gif01">
           <img src="./static/images/Airplane_histograms_new.gif" class="animated-gif" id="gif02">
         </div>
-        <div class="text-content">
-          <!-- Your text content goes here -->
-          <p>
-            We measure the time of our pure C++/CUDA implementation of GALA fitting process on 250 ShapeNet Airplane (<b>Left</b>), 
-            and ShapeNet Chair (<b>Right</b>) objects. Under the configuration of 6 virtualized logical cores (hyper-thread) of AMD EPYC 7413 
-            @2.65GHz and 1 Nvidia A100, meansurements yielded in <span style="color: rgb(93, 150, 192);"><b>2.56</b> &plusmn; 1.30s</span>, 
-            <span style="color: rgb(244, 93, 100);"><b>5.60</b> &plusmn; 1.86s</span> of airplane and 
-            <span style="color: rgb(93, 150, 192);"><b>3.17</b> &plusmn; 1.66s</span>, 
-            <span style="color: rgb(244, 93, 100);"><b>5.79</b> &plusmn; 1.67s</span> of chair. For a record, 
-            the fitting time of GALA measured on a low-end Desktop (Nvidia RTX 3060 and Intel i9-12900K) is 
-            about 3 seconds for extraction and 27 seconds for refinement. Moreover, peak GPU memory usage 
-            is <b>less than 800MB</b>.
+      <div class="column is-centered">
+          <div class="wrap-container">
+            <img src="./static/images/processing_time_comparison_new.gif" class="animated-gif" >
+            <div class="text-content">
+              <!-- Your text content goes here -->
+              <p>
+            We measure the time of our pure C++/CUDA implementation of GALA fitting process on 250 ShapeNet Airplane (<b>Top Left</b>), 
+            and ShapeNet Chair (<b>Top Right</b>) objects. Under the configuration of 6 virtualized logical cores (hyper-thread) of AMD EPYC 7413 
+            @2.65GHz and 1 Nvidia A100, meansurements yielded in less than 10 seconds statistically. Compared to other per-object 
+            fitting method (DMTet, Mosaic-SDF) (<b>Left</b>), our implementation achieves much faster fitting speed even in an lower-end desktop (configured with 
+            GTX3070 and Intel i9-12900K).
+
           </p>
-        </div>
+            </div>
+          </div>
+      </div>
     </div>
 
     <div class="column is-centered">
